@@ -9,6 +9,16 @@
         <Description>Console wrapper for easier use</Description>
         <PackageProjectUrl>https://github.com/litolax</PackageProjectUrl>
         <PackageIcon>icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/litolax</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>console</PackageTags>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
 
 </Project>
