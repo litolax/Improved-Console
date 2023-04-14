@@ -17,6 +17,7 @@ public static class ConsoleWrapper
     {
         ConsoleColor foregroundColor = logType switch
         {
+            LogType.Success => ConsoleColor.DarkGreen,
             LogType.Info => ConsoleColor.DarkYellow,
             LogType.Warning => ConsoleColor.Yellow,
             LogType.Error => ConsoleColor.DarkRed,
@@ -46,6 +47,7 @@ public static class ConsoleWrapper
     {
         ConsoleColor foregroundColor = logType switch
         {
+            LogType.Success => ConsoleColor.DarkGreen,
             LogType.Info => ConsoleColor.DarkYellow,
             LogType.Warning => ConsoleColor.Yellow,
             LogType.Error => ConsoleColor.DarkRed,
