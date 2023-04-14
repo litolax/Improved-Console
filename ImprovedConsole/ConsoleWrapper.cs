@@ -1,6 +1,6 @@
 ﻿namespace ImprovedConsole;
 
-public static class ImprovedConsole
+public static class ConsoleWrapper
 {
     public static void WriteLine(string content, ConsoleColor foregroundColor = ConsoleColor.Gray,
         ConsoleColor backgroundColor = ConsoleColor.Black)

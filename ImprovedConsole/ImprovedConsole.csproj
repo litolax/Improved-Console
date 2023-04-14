@@ -12,7 +12,8 @@
         <RepositoryUrl>https://github.com/litolax</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>console</PackageTags>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
+        <AssemblyName>ImprovedСonsole</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
