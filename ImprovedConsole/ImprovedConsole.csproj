@@ -7,6 +7,8 @@
         <Title>ImprovedConsole</Title>
         <Authors>Litolax</Authors>
         <Description>Console wrapper for easier use</Description>
+        <PackageProjectUrl>https://github.com/litolax</PackageProjectUrl>
+        <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
 
 </Project>
