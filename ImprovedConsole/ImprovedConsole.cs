@@ -17,6 +17,7 @@ public static class ImprovedConsole
     {
         ConsoleColor foregroundColor = logType switch
         {
+            LogType.Info => ConsoleColor.DarkYellow,
             LogType.Warning => ConsoleColor.Yellow,
             LogType.Error => ConsoleColor.DarkRed,
             _ => ConsoleColor.Gray
@@ -45,6 +46,7 @@ public static class ImprovedConsole
     {
         ConsoleColor foregroundColor = logType switch
         {
+            LogType.Info => ConsoleColor.DarkYellow,
             LogType.Warning => ConsoleColor.Yellow,
             LogType.Error => ConsoleColor.DarkRed,
             _ => ConsoleColor.Gray
