@@ -41,7 +41,7 @@ public static class ConsoleWrapper
             };
         }
         
-        Console.Write(label ? labelText.Concat(" ").Concat(content) : content);
+        Console.WriteLine(label ? $"{labelText} {content}" : content);
 
         Console.ResetColor();
     }
@@ -85,7 +85,7 @@ public static class ConsoleWrapper
         Console.ForegroundColor = foregroundColor;
         Console.BackgroundColor = backgroundColor;
 
-        Console.Write(label ? labelText.Concat(" ").Concat(content) : content);
+        Console.Write(label ? $"{labelText} {content}" : content);
 
         Console.ResetColor();
     }
