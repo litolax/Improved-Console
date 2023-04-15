@@ -43,7 +43,7 @@ public static class ConsoleWrapper
             };
         }
         
-        Console.WriteLine(Regex.Replace(content, @"^(\s*)", "$1" + label + " "));
+        Console.WriteLine(Regex.Replace(content, @"^(\s*)", "$1" + labelText + " "));
 
         Console.ResetColor();
     }
@@ -87,7 +87,7 @@ public static class ConsoleWrapper
         Console.ForegroundColor = foregroundColor;
         Console.BackgroundColor = backgroundColor;
 
-        Console.Write(Regex.Replace(content, @"^(\s*)", "$1" + label + " "));
+        Console.Write(Regex.Replace(content, @"^(\s*)", "$1" + labelText + " "));
 
         Console.ResetColor();
     }
