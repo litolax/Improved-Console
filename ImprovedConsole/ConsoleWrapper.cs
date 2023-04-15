@@ -1,4 +1,6 @@
-﻿namespace ImprovedConsole;
+﻿using System.Text.RegularExpressions;
+
+namespace ImprovedConsole;
 
 public static class ConsoleWrapper
 {
@@ -41,7 +43,7 @@ public static class ConsoleWrapper
             };
         }
         
-        Console.WriteLine(label ? $"{labelText} {content}" : content);
+        Console.WriteLine(Regex.Replace(content, @"^(\s*)", "$1" + label + " "));
 
         Console.ResetColor();
     }
@@ -85,7 +87,7 @@ public static class ConsoleWrapper
         Console.ForegroundColor = foregroundColor;
         Console.BackgroundColor = backgroundColor;
 
-        Console.Write(label ? $"{labelText} {content}" : content);
+        Console.Write(Regex.Replace(content, @"^(\s*)", "$1" + label + " "));
 
         Console.ResetColor();
     }
