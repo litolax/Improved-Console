@@ -16,6 +16,8 @@ jobs:
       uses: actions/setup-dotnet@v3.0.3
       with:
         dotnet-version: 6.0.100-preview.2.21155.3
+    - name: Replace package versions
+      run: echo "$(echo "`cat ./ImprovedConsole/ImprovedConsole.csproj`" | perl -pe 's/<PackageVersion>(.*)<\/PackageVersion>/<PackageVersion>'${GITHUB_REF##*/}'<\/PackageVersion>/g')" > ./ImprovedConsole/ImprovedConsole.csproj
     - name: Build
       run: dotnet build -c Release
     - name: Test
