@@ -31,6 +31,3 @@ jobs:
         PROJECT_FILE_PATH: ./ImprovedConsole/ImprovedConsole.csproj
         VERSION_REGEX: <PackageVersion>(.*)<\/PackageVersion>
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-        INCLUDE_SYMBOLS: true
-        TAG_COMMIT: false
-        NO_BUILD: true
