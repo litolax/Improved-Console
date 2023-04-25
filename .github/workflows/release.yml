@@ -40,7 +40,7 @@ jobs:
           with:
             dotnet-version: 6.0.100-preview.2.21155.3
         - name: Build
-          run: dotnet build -c Release --output Improved-Console/Artifacts
+          run: dotnet build -c Release --output ImprovedConsole/Artifacts
         - uses: actions/create-release@v1
           id: create_release
           env:
