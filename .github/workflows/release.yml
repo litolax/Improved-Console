@@ -7,58 +7,40 @@ on:
       - '*.*.*-*' 
 
 jobs:
-  build:
+  nuget:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v3.0.3
-      with:
-        dotnet-version: 6.0.100-preview.2.21155.3
-    - name: Build
-      run: dotnet build -c Release --output Improved-Console/Artifacts
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: build
-        path: Improved-Console/Artifacts
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v3.0.3
-      with:
-        dotnet-version: 6.0.100-preview.2.21155.3
-    - name: Download build artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: build
-        path: Improved-Console/Artifacts
-    - name: Replace package versions
-      run: echo "$(echo "`cat ./ImprovedConsole/ImprovedConsole.csproj`" | perl -pe 's/<PackageVersion>(.*)<\/PackageVersion>/<PackageVersion>'${GITHUB_REF##*/}'<\/PackageVersion>/g')" > ./ImprovedConsole/ImprovedConsole.csproj
-    - name: Pack nuget
-      run: dotnet pack -c Release --no-build --output .
-    - name: Push to NuGet
-      uses: alirezanet/publish-nuget@v3.0.3
-      with:
-        PROJECT_FILE_PATH: ./ImprovedConsole/ImprovedConsole.csproj
-        VERSION_REGEX: <PackageVersion>(.*)<\/PackageVersion>
-        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3.0.3
+        with:
+          dotnet-version: 6.0.100-preview.2.21155.3
+      - name: Replace package versions
+        run: echo "$(echo "`cat ./ImprovedConsole/ImprovedConsole.csproj`" | perl -pe 's/<PackageVersion>(.*)<\/PackageVersion>/<PackageVersion>'${GITHUB_REF##*/}'<\/PackageVersion>/g')" > ./ImprovedConsole/ImprovedConsole.csproj
+      - name: Build
+        run: dotnet build -c Release
+      - name: Test
+        run: dotnet test -c Release --no-build
+      - name: Pack nugets
+        run: dotnet pack -c Release --no-build --output .
+      - name: Push to NuGet
+        uses: alirezanet/publish-nuget@v3.0.3
+        with:
+          PROJECT_FILE_PATH: ./ImprovedConsole/ImprovedConsole.csproj
+          VERSION_REGEX: <PackageVersion>(.*)<\/PackageVersion>
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
   publish:
-      needs: release
+      needs: nuget
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/download-artifact@v2
-          name: Download build artifact
+        - name: Setup .NET Core SDK
+          uses: actions/setup-dotnet@v3.0.3
           with:
-            name: build
-            path: Improved-Console/Artifacts
+            dotnet-version: 6.0.100-preview.2.21155.3
+        - name: Build
+          run: dotnet build -c Release --output Improved-Console/Artifacts
         - uses: actions/create-release@v1
           id: create_release
           env:
