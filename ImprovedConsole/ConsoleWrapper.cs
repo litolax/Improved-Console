@@ -15,35 +15,18 @@ public static class ConsoleWrapper
         Console.ResetColor();
     }
 
-    public static void WriteLine(string content, LogType logType, bool label = false, ConsoleColor backgroundColor = ConsoleColor.Black)
+    public static void WriteLine(string content, LogType logType, bool label = false,
+        ConsoleColor backgroundColor = ConsoleColor.Black)
     {
-        string labelText = "";
-        
-        ConsoleColor foregroundColor = logType switch
-        {
-            LogType.Success => ConsoleColor.DarkGreen,
-            LogType.Info => ConsoleColor.DarkYellow,
-            LogType.Warning => ConsoleColor.Yellow,
-            LogType.Error => ConsoleColor.DarkRed,
-            _ => ConsoleColor.Gray
-        };
+        string tag = "";
+        ConsoleColor foregroundColor = Utils.GetColorByLogType(logType);
 
         Console.ForegroundColor = foregroundColor;
         Console.BackgroundColor = backgroundColor;
 
-        if (label)
-        {
-            labelText = logType switch
-            {
-                LogType.Success => "[Success]",
-                LogType.Info => "[Info]",
-                LogType.Warning => "[Warning]",
-                LogType.Error => "[Error]",
-                _ => ""
-            };
-        }
-        
-        Console.WriteLine(Regex.Replace(content, @"^(\s*)", "$1" + labelText + " "));
+        if (label) tag = Utils.GetTagByLogType(logType);
+
+        Console.WriteLine(Regex.Replace(content, @"^(\s*)", "$1" + tag + " "));
 
         Console.ResetColor();
     }
@@ -59,35 +42,18 @@ public static class ConsoleWrapper
         Console.ResetColor();
     }
 
-    public static void Write(string content, LogType logType, bool label = false, ConsoleColor backgroundColor = ConsoleColor.Black)
+    public static void Write(string content, LogType logType, bool label = false,
+        ConsoleColor backgroundColor = ConsoleColor.Black)
     {
-        string labelText = "";
-        
-        ConsoleColor foregroundColor = logType switch
-        {
-            LogType.Success => ConsoleColor.DarkGreen,
-            LogType.Info => ConsoleColor.DarkYellow,
-            LogType.Warning => ConsoleColor.Yellow,
-            LogType.Error => ConsoleColor.DarkRed,
-            _ => ConsoleColor.Gray
-        };
+        string tag = "";
+        ConsoleColor foregroundColor = Utils.GetColorByLogType(logType);
 
-        if (label)
-        {
-            labelText = logType switch
-            {
-                LogType.Success => "[Success]",
-                LogType.Info => "[Info]",
-                LogType.Warning => "[Warning]",
-                LogType.Error => "[Error]",
-                _ => ""
-            };
-        }
+        if (label) tag = Utils.GetTagByLogType(logType);
 
         Console.ForegroundColor = foregroundColor;
         Console.BackgroundColor = backgroundColor;
 
-        Console.Write(Regex.Replace(content, @"^(\s*)", "$1" + labelText + " "));
+        Console.Write(Regex.Replace(content, @"^(\s*)", "$1" + tag + " "));
 
         Console.ResetColor();
     }
